@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Club Membership</title>
+
+  <style>
+
+      .selected {
+        text-decoration: line-through ;
+        font-style: italic;
+        color: gray;
+      }
+
+      input {
+          width: 100%;
+          padding: 5px;
+          margin: 5px 5px 5px 0px;
+          box-sizing: border-box;
+      }
+
+  </style>
+
+</head>
+<body>
+
+    <h1>Student Club Roster</h1>
+
+    <h2>Add Students</h2>
+
+    <label for="student-name">Student Name</label><input id="student-name" name="student-name">
+    <br>
+    <label for="student-id">Student ID</label><input id="student-id" name="student-id">
+    <br>
+    <label for="student-gpa">Student GPA</label><input id="student-gpa" name="student-gpa" type="number">
+    <br>
+    <button id="add-student">Add Student</button>
+
+    <h2>Student List</h2>
+
+    <p>There are <span id="student-count"></span> student(s) in the club.</p>
+
+    <ul id="student-list"></ul>
+
+    <button id="remove-selected-students">Remove selected students</button>
+
+<script>
+/* variables */
+  let studentCount = document.querySelector('#student-count').value
+  let studentList = document.querySelector('#student-list')
+  let removeButton = document.querySelector('#remove-selected-students')
+  let addButton = document.querySelector('#add-student')
+  let studentName = document.querySelector('#student-name').value
+  let studentId = document.querySelector('#student-id').value
+  let studentGpa = document.querySelector('#student-gpa').value
+
+/* setting student count to 0 */
+  studentCount = 0
+
+/* adding function to the add button */
+  addButton.addEventListener('click', function(){
+/* if there is no value for the name then an error message appears */
+    if (studentName == 0) {
+      alert('Enter a name')
+      return
+    }
+/* if there is no value for the student id then an error occurs */
+    if (studentId == 0) {
+      alert('Enter a student ID')
+      return
+    }
+
+/* if there is no value for gpa or it falls under 0 or over 4 then an error occurs */
+    if (studentGpa == 0 || studentGpa <= 0 || studentGpa >= 4){
+      alert('Enter a valid GPA')
+      return
+    }
+
+/* adds new list items to the unorder list element */
+    let newListItem = document.createElement('li')
+/* strings the parts together to make a more readable list entry */
+    newListItem.innerHTML = '${studentName}, id: ${studentId}, GPA ${studentGpa}'
+    studentList.appendChild(newListItem)
+    textInput.value = ''
+
+/* increases the students count */
+    studentCount ++
+
+/* toggles selected class on list items */
+    newListItem.addEventListener('click', function(){
+      li.classList.toggle('selected')
+    })
+
+/* adds function to remove button to remove the list items with the selected class toggled on */
+    removeButton.addEventListener('click', function(){
+      let studentsToRemove = document.querySelectorAll('.selected')
+      studentsToRemove.forEach( function(student){
+        student.remove()
+      })
+    })
+  })
+</script>
+
+<!-- not sure why it appears to not be working at all since the console isnt showing me any errors -->
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create List</title>
+</head>
+<body>
+
+  <p>Enter text to add to a list</p>
+  <input id="new-text"></input>
+  <button id="add-text">Add to list</button>
+
+  <ul id="list-of-text"></ul>
+
+  <button id="clear">Clear list</button>
+
+
+<script>
+  /* javascript variables */
+  let textInput = document.querySelector('#new-text')
+  let addButton = document.querySelector('#add-text')
+  let textList = document.querySelector('#list-of-text')
+  let clearButton = document.querySelector('#clear')
+
+  let elementsInList = 0
+  let maxElements = 10
+
+  /* lets user push the enter key to add list items as well as the add button */
+  document.addEventListener('keyup', function(){
+    if (event.keyCode == 13) {
+      addButton.click()
+    }
+  })
+  /* adds functions to the add button */
+  addButton.addEventListener('click', function(){
+    let newText = textInput.value
+  /* if text length is 0 an item isn't added to the list */
+    if (newText.length == 0) {
+      return
+    }
+  /* when character length exceeds 50 and the user tries to add it they will be alerted and the text won't be added */
+    if (newText.length > 50) {
+      alert('Character length exceeded')
+      return
+    }
+  /* when the list items are going to exceed 10 the user is alerted */
+    if (elementsInList >= maxElements) {
+      alert('No more list items can be added')
+      return
+    }
+
+  /* applies the text te user inputs into the list */
+    let newListItem = document.createElement('li')
+    newListItem.innerHTML = newText
+    textList.appendChild(newListItem)
+    textInput.value = ''
+
+    elementsInList++
+  })
+
+  /* adds function to the clear button */
+  clearButton.addEventListener('click', function(){
+    textList.innerHTML = ''
+    elementsInList = 0
+  })
+</script>
+
+</body>
+</html>
